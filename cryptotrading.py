@@ -184,6 +184,7 @@ def his100chart(company):
     df100["LMean"]=df100["Low"].rolling(20).mean()
     df100.reset_index(inplace=True)
     
+    
     fig, ax=plt.subplots()
     plt.xticks(rotation=45)
     plt.xlabel("Last 100 days")
@@ -429,7 +430,7 @@ if __name__=="__main__":
             else: 
                 AcctMongo.insert({"Account_Balance":amount})
                 PLMongo.insert(pllist)
-                
+                cl.close()
                 print("Good Luck!")
                 print("_________________________________________________")
-                
+                break;
