@@ -16,7 +16,29 @@ import datetime as DT
 from pymongo import MongoClient
 import pandas as pd
 
+"""
+import asyncio
+import websockets
+import json
+async def test():
+    
+    async with websockets.connect('wss://ws-feed.gdax.com') as websocket:
+        request="{ \"type\": \"subscribe\", \"channels\": [{\"name\": \"ticker\", \"product_ids\": [\"ETH-USD\"]}]}"
+        myJSON = JSON.stringify(request)
+        await websocket.send(myJSON)
+        
+        
+       
+asyncio.get_event_loop().run_until_complete(test())        
+ 
+def build_request():
+    return "{ \"type\": \"subscribe\", \"channels\": [{\"name\": \"heartbeat\", \"product_ids\": [\"ETH-USD\"]}]}"
 
+    
+asyncio.get_event_loop().run_until_complete(test())
+
+
+"""
 
 def menu(option):
     print("")
@@ -259,12 +281,12 @@ def  updatePL(pllist,order):
         new={"Symbol":order["Symbol"],"Inventory":order["Volumn"],"Wap":order["Price"],"Rpl":0.00,"Upl":0.00,"Time":order["Time"] } 
         pllist.append(new) 
     else:
-        if (float(order["Volumn"]))<0.00 and (float(old["Inventory"]))>0.00:
-            Rpl=(float(order["Price"])-float(old["Wap"]))*min(abs(float(order["Volumn"])),abs(float(old["Inventory"])))
+        if order["Volumn"]<0.00 and old["Inventory"]>0.00:
+            Rpl=(order["Price"]-old["Wap"])*min(abs(order["Volumn"]),abs(old["Inventory"]))
         
         #if it is short position, buying use ask price 
         elif float(order["Volumn"])>0.00 and float(old["Inventory"])<0.00 :
-            Rpl=(float(old["Wap"])-float(order["Price"]))*min(abs(float(order["Volumn"])),abs(float(old["Inventory"])))    
+            Rpl=(old["Wap"]-order["Price"])*min(abs(order["Volumn"]),abs(old["Inventory"]))    
         
         else:
             Rpl=0.0
@@ -297,7 +319,6 @@ def showPL(pllist):
         #For long position, upl use bid price
 
         if j["Inventory"]>0.00 :
-            print("$$$$$$$$$$$$$$ here in showPL -------")
             j["Upl"]=(newprice[1]-j["WAP"])*j["Inventory"]
             
         #For short position, upl use ask price; else upl use ask price  
@@ -342,7 +363,7 @@ if __name__=="__main__":
     if AcctMongo.count() == 0:
         amount=1000000.00
     else:
-        account=list(HistoryMongo.find()) 
+        account=list(AcctMongo.find()) 
         amount=account[0]["Account_Balance"]
         AcctMongo.drop()
          
