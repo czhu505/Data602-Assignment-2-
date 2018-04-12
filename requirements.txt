@@ -1,17 +1,6 @@
 pandas 
-<<<<<<< HEAD
 requests
 bs4 
 numpy
 datetime 
 pymongo
-=======
-requests 
-bs4 
-warnings
-time
-numpy
-datetime 
-pymongo
-json
->>>>>>> 9426c192ee3a85bcf682ca1a5dc1cdde1e0ac178
