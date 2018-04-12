@@ -1,9 +1,7 @@
 pandas 
-requests
-json 
+requests 
 bs4 
 warnings
-warnings.filterwarnings("ignore")
 time
 numpy
 datetime 
