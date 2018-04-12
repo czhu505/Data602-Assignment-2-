@@ -1,9 +1,6 @@
 pandas 
 requests
-json 
 bs4 
-warnings
-time
 numpy
 datetime 
 pymongo
