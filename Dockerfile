@@ -7,4 +7,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN git clone https://github.com/czhu505/data602-assignment2 /home/ec2-user/apps
 
 EXPOSE 5000
-CMD [ "python", "/home/ec2-user/apps/Trader.py" ]
+CMD [ "python", "/home/ec2-user/apps/cryptotrading.py" ]
