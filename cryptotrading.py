@@ -6,7 +6,7 @@ Created on Sun April  8 18:30:05 2018
 """
 import pandas as pd
 import  requests
-#import json 
+import json 
 from bs4 import BeautifulSoup
 import warnings
 warnings.filterwarnings("ignore")
@@ -14,7 +14,7 @@ import time
 import numpy as np
 import datetime as DT
 from pymongo import MongoClient
-import pandas as pd
+
 
 """
 import asyncio
