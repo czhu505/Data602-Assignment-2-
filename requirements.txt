@@ -3,7 +3,6 @@ requests
 json 
 bs4 
 warnings
-warnings.filterwarnings("ignore")
 time
 numpy
 datetime 
