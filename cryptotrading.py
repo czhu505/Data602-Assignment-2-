@@ -84,10 +84,12 @@ def updatedprice(symbol):
         ticker="USDT-"+symbol
         url="https://bittrex.com/api/v1.1/public/getorderbook?market="+ticker+"&type=both"
         jdata=requests.get(url).json()
-        data=jdata["result"]["buy"][0]
+        #"sell" in API reflex to ask price
+        data=jdata["result"]["sell"][0]
         askprice=data['Rate']
         
-        data=jdata["result"]["sell"][0]
+        #"buy" in API reflex to bid price
+        data=jdata["result"]["buy"][0]
         bidprice=data['Rate']
         
         newprice=[askprice,bidprice]
