@@ -260,10 +260,11 @@ def Trade(histlist,pllist,amount):
                     print("Total cost :  "+ str(cost))  
                     print("Cash Account : ",amount)
                     histlist.append(order)
-                    pllist,order=updatePL(pllist,order)                               
+                    pllist,order=updatePL(pllist,order)       
+                        
             return(histlist,pllist,amount)
     else:
-            return([],[],amount)
+            return(histlist,pllist,amount)
 
 
 #when new trade executive, call updataPL(), calculate the profit and loss and update cash amount in account
