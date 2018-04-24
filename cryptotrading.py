@@ -103,14 +103,16 @@ def showtrade(symbol):
     url="https://bittrex.com/api/v1.1/public/getorderbook?market="+ticker+"&type=both"
     jdata=requests.get(url).json()
     
-    buydata=jdata["result"]["buy"]
+    #"sell" in API reflex to ask price
+    buydata=jdata["result"]["sell"]
     dfbuy=pd.DataFrame.from_dict(buydata)
     meanbuy=dfbuy["Rate"].mean()
     maxbuy=max(dfbuy["Rate"])
     minbuy=min(dfbuy["Rate"])
     stdbuy=np.std(dfbuy["Rate"])
     
-    selldata=jdata["result"]["sell"]
+    #"buy" in API reflex to bid price
+    selldata=jdata["result"]["buy"]
     dfsell=pd.DataFrame.from_dict(selldata)
     meansell=dfsell["Rate"].mean()
     maxsell=max(dfsell["Rate"])
@@ -258,11 +260,10 @@ def Trade(histlist,pllist,amount):
                     print("Total cost :  "+ str(cost))  
                     print("Cash Account : ",amount)
                     histlist.append(order)
-                    pllist,order=updatePL(pllist,order)
-                    
-                    
-    return(histlist,pllist,amount)
-
+                    pllist,order=updatePL(pllist,order)                               
+            return(histlist,pllist,amount)
+    else:
+            return([],[],amount)
 
 
 #when new trade executive, call updataPL(), calculate the profit and loss and update cash amount in account
@@ -299,7 +300,7 @@ def  updatePL(pllist,order):
         else:
             Wap=0.00
             
-        new={"Symbol":order["Symbol"], "Inventory":inven,"WAP":Wap,"Rpl":Rpl,"Upl":0.00,"Time":order["Time"]}
+        new={"Symbol":order["Symbol"], "Inventory":inven,"Wap":Wap,"Rpl":Rpl,"Upl":0.00,"Time":order["Time"]}
         pllist.append(new)
   
     return(pllist,order)
