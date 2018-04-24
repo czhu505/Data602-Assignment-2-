@@ -320,15 +320,15 @@ def showPL(pllist):
         #For long position, upl use bid price
 
         if j["Inventory"]>0.00 :
-            j["Upl"]=(newprice[1]-j["WAP"])*j["Inventory"]
+            j["Upl"]=(newprice[1]-j["Wap"])*j["Inventory"]
             
         #For short position, upl use ask price; else upl use ask price  
         elif j["Inventory"]<0.00 :
-            j["Upl"]=(j["WAP"]-newprice[0])*j["Inventory"]
+            j["Upl"]=(j["Wap"]-newprice[0])*j["Inventory"]
            
         else: 
             j["Upl"]=0.0
-            j["WAP"]=0.0
+            j["Wap"]=0.0
                
     return(pllist)  
     
@@ -421,7 +421,7 @@ if __name__=="__main__":
                     print("======================================")
                     PLdf= pd.DataFrame(pllist)                
                     #arrange the column order based on plcolname
-                    PLdf=PLdf[["Symbol", "Inventory","WAP","Rpl","Upl","Time"]]
+                    PLdf=PLdf[["Symbol", "Inventory","Wap","Rpl","Upl","Time"]]
                     print(PLdf[::-1])  
                     
                 print("_________________________________________________")   
