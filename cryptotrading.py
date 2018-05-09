@@ -16,30 +16,6 @@ import datetime as DT
 from pymongo import MongoClient
 
 
-"""
-import asyncio
-import websockets
-import json
-async def test():
-    
-    async with websockets.connect('wss://ws-feed.gdax.com') as websocket:
-        request="{ \"type\": \"subscribe\", \"channels\": [{\"name\": \"ticker\", \"product_ids\": [\"ETH-USD\"]}]}"
-        myJSON = JSON.stringify(request)
-        await websocket.send(myJSON)
-        
-        
-       
-asyncio.get_event_loop().run_until_complete(test())        
- 
-def build_request():
-    return "{ \"type\": \"subscribe\", \"channels\": [{\"name\": \"heartbeat\", \"product_ids\": [\"ETH-USD\"]}]}"
-
-    
-asyncio.get_event_loop().run_until_complete(test())
-
-
-"""
-
 def menu(option):
     print("")
     print("======================================")
